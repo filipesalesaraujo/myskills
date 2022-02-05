@@ -53,7 +53,6 @@ export function Home() {
         keyExtractor={item => item}
         renderItem={({item}) => <SkillCard skill={item} />}
       />
-      
     </View>
   );
 }

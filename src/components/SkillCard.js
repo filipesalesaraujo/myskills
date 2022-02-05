@@ -3,7 +3,6 @@ import {TouchableOpacity, StyleSheet, Text} from 'react-native';
 export function SkillCard({skill}) {
   return (
     <TouchableOpacity
-      key={skill}
       style={styles.buttonSkill}
       activeOpacity={0.7}>
       <Text style={styles.textSkill}>{skill}</Text>

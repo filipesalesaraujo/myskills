@@ -10,13 +10,22 @@ import {
 import {Button} from '../components/Button';
 import {SkillCard} from '../components/SkillCard';
 
+interface SkillData {
+  id: string;
+  name: string;
+}
+
 export function Home() {
   const [newSkill, setNewSkill] = useState('');
-  const [mySkills, setMySkills] = useState([]);
+  const [mySkills, setMySkills] = useState<SkillData[]>([]);
   const [gretting, setGretting] = useState('');
 
   function handleAddNewSkill() {
-    setMySkills([...mySkills, newSkill]);
+    const data = {
+      id: String(new Date().getTime()),
+      name: newSkill,
+    };
+    setMySkills([...mySkills, data]);
   }
 
   useEffect(() => {
@@ -32,7 +41,6 @@ export function Home() {
 
   return (
     <View style={styles.container}>
-
       <Text style={styles.title}>Welcome, Filipe</Text>
 
       <Text style={styles.grettings}>{gretting}</Text>
@@ -50,8 +58,8 @@ export function Home() {
 
       <FlatList
         data={mySkills}
-        keyExtractor={item => item}
-        renderItem={({item}) => <SkillCard skill={item} />}
+        keyExtractor={item => item.id}
+        renderItem={({item}) => <SkillCard skill={item.name} />}
       />
     </View>
   );
@@ -63,7 +71,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#121015',
     paddingHorizontal: 20,
     paddingVertical: 70,
-    paddingHorizontal: 30,
   },
   title: {
     color: '#fff',
